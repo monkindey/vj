@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Json Viewer</title>
+	<style>
+		ul {
+			list-style: none;
+		}
+
+		.wrap {
+			color: #729fcf;
+		}
+
+		.key {
+			color: #204a87;
+		}
+
+		.value {
+			color: #4e9a06;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<oj :parsed="parsed"></oj>
+	</div>
+
+	<script id="object-tpl" type="text/template">
+		<div>
+			<span class="wrap">{{ wrap.first }}</span>
+			<ul>
+				<li v-for="(k, i) in keys">
+					<span class="key">{{ k }}</span><strong>:</strong> 
+					<oj	v-if="isObject" :parsed="values[i]"></oj>
+					<span v-else class="value">{{ values[i] }}</span>
+				</li>
+			</ul>
+			<span class="wrap">{{ wrap.last }}</span>
+		</div>
+	</script>
+</body>
+<script src="js/vue2.js"></script>
+<script src="js/vj.js"></script>
+</html>
