@@ -8,12 +8,36 @@
 			list-style: none;
 		}
 
+		.obj {
+			/*display: inline-block;*/
+/*			position: absolute;
+			left: 0;
+			top: 0;
+*/		}
+		
+		/* : */
+		.colon {
+			vertical-align: top;
+		}
+
+		/* {} [] */
 		.wrap {
 			color: #729fcf;
 		}
 
+		.obj .wrap.first {
+			position: absolute;
+			top: 0;
+			left: 55px;
+		}
+
+		.prop li {
+			position: relative;
+		}
+		
 		.key {
 			color: #204a87;
+			vertical-align: top;
 		}
 
 		.value {
@@ -23,16 +47,16 @@
 </head>
 <body>
 	<div id="app">
-		<oj :parsed="parsed"></oj>
+		<oj :init=true :parsed="parsed"></oj>
 	</div>
 
 	<script id="object-tpl" type="text/template">
-		<div>
-			<span class="wrap">{{ wrap.first }}</span>
-			<ul>
+		<div :class="init ? '' : 'obj'">
+			<span class="wrap first">{{ wrap.first }}</span>
+			<ul class="prop">
 				<li v-for="(k, i) in keys">
-					<span class="key">{{ k }}</span><strong>:</strong> 
-					<oj	v-if="isObject" :parsed="values[i]"></oj>
+					<span class="key">{{ k }}</span><strong class="colon">:</strong> 
+					<oj :parsed="values[i]" v-if="isObject(k)"></oj>
 					<span v-else class="value">{{ values[i] }}</span>
 				</li>
 			</ul>

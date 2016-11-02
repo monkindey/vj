@@ -1,11 +1,14 @@
 var data = {
 	name: 'monkindey',
-	age: 23,
-	// skills: ['basketball', 'code'],
-	// private: {
-	// 	mobile: '18826***154',
-	// 	birthday: '07*6'
-	// }
+	age: '2*',
+	skills: [
+		'basketball',
+		'code'
+	],
+	private: {
+		mobile: '18826***154',
+		birthday: '07*6'
+	}
 };
 
 // data = {
@@ -17,11 +20,14 @@ var data = {
 
 Vue.component('Oj', {
 	template: '#object-tpl',
-	props: ['parsed'],
+	props: ['parsed', 'init'],
 	computed: {
 		wrap: function() {
 			if (Array.isArray(this.parsed)) {
-
+				return {
+					first: '[',
+					last: ']'
+				}
 			} else {
 				return {
 					first: '{',
@@ -41,8 +47,8 @@ Vue.component('Oj', {
 		}
 	},
 	methods: {
-		isObject: function() {
-			return typeof this.parsed === 'object'
+		isObject: function(k) {
+			return typeof this.parsed[k] === 'object'
 		}
 	}
 })
@@ -58,7 +64,6 @@ var vm = new Vue({
 		}
 	},
 	mounted: function() {
-		console.log(this.wrap);
-		console.log('mounted');
+		// console.log('mounted');
 	}
 })
