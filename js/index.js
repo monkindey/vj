@@ -6,8 +6,8 @@ var data = {
 		'code'
 	],
 	private: {
-		mobile: '18826***154',
-		birthday: '07*6',
+		mobile: '1882***154',
+		birthday: '0**6',
 		other: {
 			single: 'f**k'
 		}
@@ -19,7 +19,7 @@ Vue.component('Oj', {
 	props: ['parsed', 'init'],
 	data: function() {
 		return {
-			isClose: []
+			isClose: {}
 		}
 	},
 	computed: {
@@ -48,8 +48,8 @@ Vue.component('Oj', {
 		}
 	},
 	methods: {
-		toggle: function(i) {
-			this.isClose.splice(i, 1, !this.isClose[i]);
+		toggle: function(k) {
+			this.$set(this.isClose, k, !this.isClose[k])
 		},
 		isObject: function(k) {
 			return typeof this.parsed[k] === 'object'

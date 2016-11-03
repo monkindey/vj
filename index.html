@@ -77,13 +77,14 @@
 		<div :class="init ? '' : 'obj'">
 			<ul class="prop">
 				<li v-for="(k, i) in keys">
-					<span @click="toggle(i)" v-if="isObject(k)"
-						:class="isClose[i] ? 'close' : 'open'"></span>
+					<span @click="toggle(k)" v-if="isObject(k)"
+						:class="isClose[k] ? 'close' : 'open'"></span>
 					<span class="key">{{ k }}</span>
 					<strong class="colon">:</strong> 
-					<span class="wrap first" v-if="isObject(k)">{{ wrapFirst(k) }}</span>
-					<oj :parsed="values[i]" v-if="isObject(k)"></oj>
-					<span v-else class="value">{{ values[i] }}</span>
+					<span v-show="!isClose[k]" class="wrap first" 
+						v-if="isObject(k)">{{ wrapFirst(k) }}</span>
+					<oj v-show="!isClose[k]" :parsed="values[i]" v-if="isObject(k)"></oj>
+					<span v-show="!isClose[k]" v-else class="value">{{ values[i] }}</span>
 				</li>
 			</ul>
 			<span class="wrap">{{ wrap.last }}</span>
@@ -91,5 +92,5 @@
 	</script>
 </body>
 <script src="js/vue2.js"></script>
-<script src="js/vj.js"></script>
+<script src="js/index.js"></script>
 </html>
