@@ -7,13 +7,21 @@ var data = {
 	],
 	private: {
 		mobile: '18826***154',
-		birthday: '07*6'
+		birthday: '07*6',
+		other: {
+			single: 'f**k'
+		}
 	}
 };
 
 Vue.component('Oj', {
 	template: '#object-tpl',
 	props: ['parsed', 'init'],
+	data: function() {
+		return {
+			isClose: []
+		}
+	},
 	computed: {
 		wrap: function() {
 			if (Array.isArray(this.parsed)) {
@@ -40,6 +48,9 @@ Vue.component('Oj', {
 		}
 	},
 	methods: {
+		toggle: function(i) {
+			this.isClose.splice(i, 1, !this.isClose[i]);
+		},
 		isObject: function(k) {
 			return typeof this.parsed[k] === 'object'
 		},
@@ -48,7 +59,7 @@ Vue.component('Oj', {
 				return '['
 			} else {
 				return '{'
-			} 
+			}
 		}
 	}
 })
@@ -67,7 +78,7 @@ var vm = new Vue({
 				return '['
 			} else {
 				return '{'
-			} 
+			}
 		}
 	},
 	mounted: function() {

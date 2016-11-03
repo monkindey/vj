@@ -13,9 +13,6 @@
 			margin: 0;
 		}
 
-		.obj {
-		}
-		
 		/* : */
 		.colon {
 			vertical-align: top;
@@ -42,9 +39,27 @@
 			vertical-align: top;
 		}
 
-		.key::before {
-			content: '-',
+		.open, .close {
+			float: left;
+			margin-right: 3px;
+		}
+		.open::before, .close::before {
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			display: inline-block;
+			line-height: 10px;
+			height: 10px;
+			cursor: pointer;
+		}
+
+		.open::before {
+			content: '-';
 			color: red;
+		}
+
+		.close::before {
+			content: '+';
+			color: #4e9a06;
 		}
 
 		.value {
@@ -62,7 +77,10 @@
 		<div :class="init ? '' : 'obj'">
 			<ul class="prop">
 				<li v-for="(k, i) in keys">
-					<span class="key">{{ k }}</span><strong class="colon">:</strong> 
+					<span @click="toggle(i)" v-if="isObject(k)"
+						:class="isClose[i] ? 'close' : 'open'"></span>
+					<span class="key">{{ k }}</span>
+					<strong class="colon">:</strong> 
 					<span class="wrap first" v-if="isObject(k)">{{ wrapFirst(k) }}</span>
 					<oj :parsed="values[i]" v-if="isObject(k)"></oj>
 					<span v-else class="value">{{ values[i] }}</span>
