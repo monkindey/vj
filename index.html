@@ -4,16 +4,17 @@
 	<meta charset="UTF-8">
 	<title>Vue Json Viewer</title>
 	<style>
+		body {
+			font-family: consolas;
+		}
+
 		ul {
 			list-style: none;
+			margin: 0;
 		}
 
 		.obj {
-			/*display: inline-block;*/
-/*			position: absolute;
-			left: 0;
-			top: 0;
-*/		}
+		}
 		
 		/* : */
 		.colon {
@@ -26,9 +27,9 @@
 		}
 
 		.obj .wrap.first {
-			position: absolute;
-			top: 0;
-			left: 55px;
+			/*position: absolute;*/
+			/*top: 0;*/
+			/*left: 55px;*/
 		}
 
 		.prop li {
@@ -36,8 +37,14 @@
 		}
 		
 		.key {
+			float: left;
 			color: #204a87;
 			vertical-align: top;
+		}
+
+		.key::before {
+			content: '-',
+			color: red;
 		}
 
 		.value {
@@ -47,15 +54,16 @@
 </head>
 <body>
 	<div id="app">
+		<span class="wrap first">{{ wrapFirst }}</span>
 		<oj :init=true :parsed="parsed"></oj>
 	</div>
 
 	<script id="object-tpl" type="text/template">
 		<div :class="init ? '' : 'obj'">
-			<span class="wrap first">{{ wrap.first }}</span>
 			<ul class="prop">
 				<li v-for="(k, i) in keys">
 					<span class="key">{{ k }}</span><strong class="colon">:</strong> 
+					<span class="wrap first" v-if="isObject(k)">{{ wrapFirst(k) }}</span>
 					<oj :parsed="values[i]" v-if="isObject(k)"></oj>
 					<span v-else class="value">{{ values[i] }}</span>
 				</li>

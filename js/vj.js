@@ -11,13 +11,6 @@ var data = {
 	}
 };
 
-// data = {
-// 	name: 'monkindey',
-// 	age: 23
-// }
-
-// data = [1,2,3];
-
 Vue.component('Oj', {
 	template: '#object-tpl',
 	props: ['parsed', 'init'],
@@ -49,6 +42,13 @@ Vue.component('Oj', {
 	methods: {
 		isObject: function(k) {
 			return typeof this.parsed[k] === 'object'
+		},
+		wrapFirst: function(k) {
+			if (Array.isArray(this.parsed[k])) {
+				return '['
+			} else {
+				return '{'
+			} 
 		}
 	}
 })
@@ -61,6 +61,13 @@ var vm = new Vue({
 	computed: {
 		parsed: function() {
 			return JSON.parse(this.json);
+		},
+		wrapFirst: function() {
+			if (Array.isArray(this.parsed)) {
+				return '['
+			} else {
+				return '{'
+			} 
 		}
 	},
 	mounted: function() {
