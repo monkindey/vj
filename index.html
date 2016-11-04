@@ -4,6 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Vue Json Viewer</title>
 	<style>
+		[v-cloak] {
+			display: none;
+		}
+
 		body {
 			font-family: consolas;
 		}
@@ -68,7 +72,7 @@
 	</style>
 </head>
 <body>
-	<div id="app">
+	<div id="app" v-cloak>
 		<span class="wrap first">{{ wrapFirst }}</span>
 		<oj :init=true :parsed="parsed"></oj>
 	</div>
